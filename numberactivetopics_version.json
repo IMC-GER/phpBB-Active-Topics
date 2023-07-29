@@ -2,7 +2,7 @@
     "stable": {
         "1.0": {
             "current": "1.0.0",
-            "announcement": "",
+            "announcement": "https://www.phpbb.de/community/viewtopic.php?t=246827",
             "download": "https://github.com/IMC-GER/phpBB-Number-of-Active-Topics/tags",
             "eol": null,
             "security": false
