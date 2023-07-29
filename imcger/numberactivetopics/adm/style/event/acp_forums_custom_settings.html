@@ -1,0 +1,28 @@
+{#
+	Number of Active Topics
+	An extension for the phpBB Forum Software package.
+
+	@copyright (c) 2023, Thorsten Ahlers
+	@license GNU General Public License, version 2 (GPL-2.0)
+#}
+<script>
+	// Enables the setting, number of posts in active topics
+	function imcgerMoveTopicsPerPage()
+	{
+		let forumType		 = document.getElementById('forum_type'),
+			forumTypeValue	 = forumType.options[forumType.selectedIndex].value,
+			forumCatOptions	 = document.querySelectorAll('#forum_cat_options fieldset')[0],
+			forumPostOptions = document.querySelectorAll('#forum_post_options fieldset')[0],
+			topicsPerPage	 = document.getElementById('topics_per_page').parentElement.parentElement;
+
+		if (forumTypeValue == {{ FORUM_CAT }}) {
+			forumCatOptions.appendChild(topicsPerPage);
+		} else {
+			forumPostOptions.appendChild(topicsPerPage);
+		}
+	}
+
+	document.getElementById('forum_type').addEventListener('change', imcgerMoveTopicsPerPage);
+
+	imcgerMoveTopicsPerPage();
+</script>
