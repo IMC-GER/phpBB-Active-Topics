@@ -1,8 +1,7 @@
 # phpBB Number of Active Topics
 
 ## Description
-This extension enables the setting, topics per page for active topics.
-
+If you configure a forum as a category, the active topics of the sub-forums can be displayed there. This extension allows you to set the number of topics.
 #### Settings in Administration Control Panel
 In "Manage Forums" -> "Edit Forum"
 - Topics per page
