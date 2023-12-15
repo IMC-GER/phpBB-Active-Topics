@@ -78,7 +78,7 @@ class main_listener implements EventSubscriberInterface
 		$this->forum_id = $event['forum_id'];
 
 		$sql = 'SELECT imcger_display_active_position FROM ' . FORUMS_TABLE . '
-                WHERE forum_id = ' . $this->forum_id;
+				WHERE forum_id = ' . (int) $this->forum_id;
 
 		$result = $this->db->sql_query($sql);
 		$row = $this->db->sql_fetchrow($result);
@@ -101,7 +101,8 @@ class main_listener implements EventSubscriberInterface
 		$links_forum	 = '';
 		$topic_forum_id	 = $topic_row['FORUM_ID'];
 
-		do {
+		do
+		{
 			$sql = 'SELECT forum_name, parent_id FROM ' . FORUMS_TABLE . '
 					WHERE forum_id = ' . (int) $topic_forum_id;
 

@@ -10,7 +10,7 @@
 (function($) {  // Avoid conflicts with other libraries
 
 	'use strict';
-	
+
 	// Move active topics to the top of forumlist
 	if ($('.forumbg dt#active_topics').length) {
 		$('.forabg').first().before($('.forumbg'));
