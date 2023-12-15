@@ -1,10 +1,10 @@
 {
-    "name": "imcger/numberactivetopics",
+    "name": "imcger/activetopics",
     "type": "phpbb-extension",
-    "description": "This extension enables the setting, topics per page for active topics.",
+    "description": "This extension enables settings for active topics.",
     "homepage": "",
-    "version": "1.0.0",
-    "time": "2023-07-29",
+    "version": "1.1.0",
+    "time": "2023-12-15",
     "license": "GPL-2.0-only",
     "authors": [{
             "name": "Thorsten Ahlers",
@@ -16,14 +16,14 @@
         "php": ">=7.1.3"
     },
     "extra": {
-        "display-name": "Number of Active Topics",
+        "display-name": "Active Topics",
         "soft-require": {
             "phpbb/phpbb": ">=3.3.0"
         },
         "version-check": {
             "host": "raw.githubusercontent.com",
-            "directory": "/IMC-GER/phpBB-Number-of-Active-Topics/master",
-            "filename": "numberactivetopics_version.json",
+            "directory": "/IMC-GER/phpBB-Active-Topics/master",
+            "filename": "activetopics_version.json",
             "ssl": true
         }
     }

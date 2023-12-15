@@ -1,0 +1,19 @@
+services:
+    imcger.activetopics.acp_listener:
+        class: imcger\activetopics\event\acp_listener
+        arguments:
+            - '@request'
+            - '@language'
+        tags:
+            - { name: event.listener }
+            
+    imcger.activetopics.main_listener:
+        class: imcger\activetopics\event\main_listener
+        arguments:
+            - '@template'
+            - '@dbal.conn'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+        tags:
+            - { name: event.listener }
+            

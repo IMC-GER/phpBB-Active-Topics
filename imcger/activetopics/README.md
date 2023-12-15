@@ -1,7 +1,8 @@
 # phpBB Active Topics
 
 ## Description
-If you configure a forum as a category, the active topics of the sub-forums can be displayed there. This extension allows you to define the position of the active topics and the number of topics displayed.
+If you configure a forum as a category, the active topics of the sub-forums can be displayed there.
+This extension allows you to define the position of the active topics and the number of topics displayed.
 
 #### Settings in Administration Control Panel
 In "Manage Forums" -> "Edit Forum"
