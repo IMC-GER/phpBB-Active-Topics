@@ -3,9 +3,10 @@
 ## Description
 If you configure a forum as a category, the active topics of the sub-forums can be displayed there.
 This extension allows you to define the position of the active topics and the number of topics displayed.
+It adds the link to the forum from which the topic originated to the list of active topics.
 
 #### Settings in Administration Control Panel
-In "Manage Forums" -> "Edit Forum"
+In "Forums" -> "Manage Forums" -> "Edit Forum"
 - Display active topics above the forums
 - Topics per page
 
@@ -28,6 +29,9 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 - Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" extension.
 
 ## Changelog
+
+### v1.1.1 (13-10-2024)
+- Minor change
 
 ### v1.1.0 (15-12-2023)
 - Published

@@ -37,6 +37,7 @@ class main_listener implements EventSubscriberInterface
 	 *
 	 * @param \phpbb\template\template			$template
 	 * @param \phpbb\db\driver\driver_interface $db
+	 * @param string							$root_path
 	 * @param string							$php_ext
 	 */
 	public function __construct
@@ -77,7 +78,8 @@ class main_listener implements EventSubscriberInterface
 	{
 		$this->forum_id = $event['forum_id'];
 
-		$sql = 'SELECT imcger_display_active_position FROM ' . FORUMS_TABLE . '
+		$sql = 'SELECT imcger_display_active_position
+				FROM ' . FORUMS_TABLE . '
 				WHERE forum_id = ' . (int) $this->forum_id;
 
 		$result = $this->db->sql_query($sql);
@@ -103,7 +105,8 @@ class main_listener implements EventSubscriberInterface
 
 		do
 		{
-			$sql = 'SELECT forum_name, parent_id FROM ' . FORUMS_TABLE . '
+			$sql = 'SELECT forum_name, parent_id
+					FROM ' . FORUMS_TABLE . '
 					WHERE forum_id = ' . (int) $topic_forum_id;
 
 			$result = $this->db->sql_query($sql);

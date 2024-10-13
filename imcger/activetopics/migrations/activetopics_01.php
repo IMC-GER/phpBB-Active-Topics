@@ -53,7 +53,9 @@ class activetopics_01 extends \phpbb\db\migration\migration
 
 	public function reset_topics_per_page()
 	{
-		$sql = 'UPDATE ' . FORUMS_TABLE . ' SET forum_topics_per_page = 0 WHERE forum_type = ' . FORUM_CAT;
+		$sql = 'UPDATE ' . FORUMS_TABLE . '
+				SET forum_topics_per_page = 0
+				WHERE forum_type = ' . FORUM_CAT;
 		$this->db->sql_query($sql);
 	}
 }

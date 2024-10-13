@@ -1,1 +1,12 @@
-{% if S_DISPLAY_ACTIVE %} &raquo; {{ lang('IN') }} {{ topicrow.IMCGER_LINKS_FORUM }}{% endif %}
+{#
+ *	Active Topics
+ *	An extension for the phpBB Forum Software package.
+ *
+ *	@copyright (c) 2023, Thorsten Ahlers
+ *	@license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+{% if S_DISPLAY_ACTIVE %}
+	&raquo; {{ lang('IN') }} {{ topicrow.IMCGER_LINKS_FORUM }}
+{% endif %}

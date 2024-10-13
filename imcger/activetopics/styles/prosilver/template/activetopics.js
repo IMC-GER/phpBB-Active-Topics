@@ -1,4 +1,4 @@
-/*
+/**
  * Active Topics
  * An extension for the phpBB Forum Software package.
  *
