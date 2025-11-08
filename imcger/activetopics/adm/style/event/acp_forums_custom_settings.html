@@ -1,0 +1,27 @@
+{#
+ *	Active Topics
+ *	An extension for the phpBB Forum Software package.
+ *
+ *	@copyright (c) 2023, Thorsten Ahlers
+ *	@license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+<script>
+	// Toggle the input field topics_per_page
+	document.getElementById('forum_type').addEventListener('change', function() {
+		const forumType = document.getElementById('forum_type');
+		const selectedValue = forumType.options[forumType.selectedIndex].value;
+
+		if (selectedValue == '{{ FORUM_CAT }}') {
+			document.getElementById('imcger_aktive_topics_per_page').disabled = false;
+			document.getElementById('topics_per_page').disabled = true;
+		} else {
+			document.getElementById('imcger_aktive_topics_per_page').disabled = true;
+			document.getElementById('topics_per_page').disabled = false;
+		}
+	});
+
+	// Trigger change event on page load
+	document.getElementById('forum_type').dispatchEvent(new Event('change'));
+</script>

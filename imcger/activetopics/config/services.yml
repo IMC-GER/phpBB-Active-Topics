@@ -1,6 +1,6 @@
 services:
     imcger.activetopics.acp_listener:
-        class: imcger\activetopics\event\acp_listener
+        class: imcger\activetopics\event\at_acp_listener
         arguments:
             - '@request'
             - '@language'
@@ -8,7 +8,7 @@ services:
             - { name: event.listener }
             
     imcger.activetopics.main_listener:
-        class: imcger\activetopics\event\main_listener
+        class: imcger\activetopics\event\at_main_listener
         arguments:
             - '@template'
             - '@dbal.conn'

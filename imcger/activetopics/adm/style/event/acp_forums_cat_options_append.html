@@ -1,0 +1,22 @@
+{#
+ *	Active Topics
+ *	An extension for the phpBB Forum Software package.
+ *
+ *	@copyright (c) 2023, Thorsten Ahlers
+ *	@license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+		<dl>
+			<dt><label for="imcger_display_active_position">{{ lang('IMCGER_AT_POSITION') ~ lang('COLON') }}</label><br><span>{{ lang('IMCGER_AT_POSITION_EXPLAIN') }}</span></dt>
+			<dd><label><input type="radio" class="radio" name="imcger_display_active_position" value="1"{{ IMCGER_DISPLAY_ACTIVE_POSITION == 1 ? ' checked' }}> {{ lang('YES') }}</label>
+				<label><input type="radio" class="radio" name="imcger_display_active_position" value="0"{{ IMCGER_DISPLAY_ACTIVE_POSITION == 0 ? ' checked' }}> {{ lang('NO') }}</label></dd>
+		</dl>
+		<dl>
+			<dt><label for="topics_per_page">{{ lang('IMCGER_AT_TOPICS_PER_PAGE') ~ lang('COLON') }}</label><br ><span>{{ lang('FORUM_TOPICS_PAGE_EXPLAIN') }}</span></dt>
+			<dd><input type="number" id="imcger_aktive_topics_per_page" name="topics_per_page" value="{{ TOPICS_PER_PAGE }}" min="0" max="9999" ></dd>
+		</dl>
+		<dl>
+			<dt><label for="imcger_at_show_forum_parents">{{ lang('IMCGER_AT_SHOW_FORUM_PARENTS') ~ lang('COLON') }}</label><br><span>{{ lang('IMCGER_AT_SHOW_FORUM_PARENTS_EXPLAIN') }}</span></dt>
+			<dd><label><input type="radio" class="radio" name="imcger_at_show_forum_parents" value="1"{{ IMCGER_AT_SHOW_FORUM_PARENTS == 1 ? ' checked' }}> {{ lang('YES') }}</label>
+				<label><input type="radio" class="radio" name="imcger_at_show_forum_parents" value="0"{{ IMCGER_AT_SHOW_FORUM_PARENTS == 0 ? ' checked' }}> {{ lang('NO') }}</label></dd>
+		</dl>

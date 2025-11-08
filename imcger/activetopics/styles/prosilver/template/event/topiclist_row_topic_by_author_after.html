@@ -7,6 +7,6 @@
  *
  #}
 
-{% if S_DISPLAY_ACTIVE %}
-	&raquo; {{ lang('IN') }} {{ topicrow.IMCGER_LINKS_FORUM }}
+{% if S_DISPLAY_ACTIVE and topicrow.IMCGER_AT_FORUM_PARENTS %}
+	&raquo; {{ lang('IN') }} {{ topicrow.IMCGER_AT_FORUM_PARENTS }}
 {% endif %}
