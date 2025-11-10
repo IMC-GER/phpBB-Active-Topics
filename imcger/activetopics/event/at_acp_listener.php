@@ -36,10 +36,10 @@ class at_acp_listener implements EventSubscriberInterface
 	 */
 	public function acp_manage_forums_request_data(object $event): void
 	{
-		$array = $event['forum_data'];
-		$array['imcger_display_active_position'] = $this->request->variable('imcger_display_active_position', 0);
-		$array['imcger_at_show_forum_parents']	 = $this->request->variable('imcger_at_show_forum_parents', 0);
-		$event['forum_data'] = $array;
+		$forum_data = $event['forum_data'];
+		$forum_data['imcger_display_active_position'] = $this->request->variable('imcger_display_active_position', 0);
+		$forum_data['imcger_at_show_forum_parents']	  = $this->request->variable('imcger_at_show_forum_parents', 0);
+		$event['forum_data'] = $forum_data;
 	}
 
 	/**
@@ -49,10 +49,10 @@ class at_acp_listener implements EventSubscriberInterface
 	{
 		if ($event['action'] == 'add')
 		{
-			$array = $event['forum_data'];
-			$array['imcger_display_active_position'] = '0';
-			$array['imcger_at_show_forum_parents']	 = '0';
-			$event['forum_data'] = $array;
+			$forum_data = $event['forum_data'];
+			$forum_data['imcger_display_active_position'] = '0';
+			$forum_data['imcger_at_show_forum_parents']	  = '0';
+			$event['forum_data'] = $forum_data;
 		}
 	}
 
@@ -61,9 +61,9 @@ class at_acp_listener implements EventSubscriberInterface
 	 */
 	public function acp_manage_forums_display_form(object $event): void
 	{
-		$array = $event['template_data'];
-		$array['IMCGER_DISPLAY_ACTIVE_POSITION'] = $event['forum_data']['imcger_display_active_position'];
-		$array['IMCGER_AT_SHOW_FORUM_PARENTS'] = $event['forum_data']['imcger_at_show_forum_parents'];
-		$event['template_data'] = $array;
+		$template_data = $event['template_data'];
+		$template_data['IMCGER_DISPLAY_ACTIVE_POSITION'] = $event['forum_data']['imcger_display_active_position'];
+		$template_data['IMCGER_AT_SHOW_FORUM_PARENTS']	 = $event['forum_data']['imcger_at_show_forum_parents'];
+		$event['template_data'] = $template_data;
 	}
 }

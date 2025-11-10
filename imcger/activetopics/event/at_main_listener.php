@@ -30,8 +30,8 @@ class at_main_listener implements EventSubscriberInterface
 	public static function getSubscribedEvents(): array
 	{
 		return [
-			'core.viewforum_modify_topicrow'	=> 'set_template_vars_forum_name',
-			'core.generate_forum_nav'			=> 'get_forum_data',
+			'core.viewforum_modify_topicrow' => 'set_template_vars_topic_row',
+			'core.generate_forum_nav'		 => 'get_forum_data',
 		];
 	}
 
@@ -49,38 +49,36 @@ class at_main_listener implements EventSubscriberInterface
 	}
 
 	/**
-	 * Set template vars
+	 * Set template vars for parent forums in topic row
 	 */
-	public function set_template_vars_forum_name(object $event): void
+	public function set_template_vars_topic_row(object $event): void
 	{
-		if (!$this->show_parent)
+		if ($this->show_parent)
 		{
-			return;
+			$topic_row		 = $event['topic_row'];
+			$links_forum	 = '';
+			$topic_forum_id	 = $topic_row['FORUM_ID'];
+
+			do
+			{
+				$sql = 'SELECT forum_name, parent_id
+						FROM ' . FORUMS_TABLE . '
+						WHERE forum_id = ' . (int) $topic_forum_id;
+
+				$result = $this->db->sql_query($sql);
+				$row = $this->db->sql_fetchrow($result);
+				$this->db->sql_freeresult($result);
+
+				$u_view_forum = append_sid("{$this->phpbb_root_path}viewforum.{$this->php_ext}", 'f=' . $topic_forum_id);
+				$link_forum	  = '<a href="' . $u_view_forum . '">' . $row['forum_name'] . '</a>';
+
+				$links_forum	= strlen($links_forum) == 0 ? $link_forum : $link_forum . ' &raquo; ' . $links_forum;
+				$topic_forum_id = $row['parent_id'];
+
+			} while ($row['parent_id'] != 0 && $row['parent_id'] != $this->forum_id);
+
+			$topic_row['IMCGER_AT_FORUM_PARENTS'] = $links_forum;
+			$event['topic_row'] = $topic_row;
 		}
-
-		$topic_row		 = $event['topic_row'];
-		$links_forum	 = '';
-		$topic_forum_id	 = $topic_row['FORUM_ID'];
-
-		do
-		{
-			$sql = 'SELECT forum_name, parent_id
-					FROM ' . FORUMS_TABLE . '
-					WHERE forum_id = ' . (int) $topic_forum_id;
-
-			$result = $this->db->sql_query($sql);
-			$row = $this->db->sql_fetchrow($result);
-			$this->db->sql_freeresult($result);
-
-			$u_view_forum = append_sid("{$this->phpbb_root_path}viewforum.{$this->php_ext}", 'f=' . $topic_forum_id);
-			$link_forum	  = '<a href="' . $u_view_forum . '">' . $row['forum_name'] . '</a>';
-
-			$links_forum	= strlen($links_forum) == 0 ? $link_forum : $link_forum . ' &raquo; ' . $links_forum;
-			$topic_forum_id = $row['parent_id'];
-
-		} while ($row['parent_id'] != 0 && $row['parent_id'] != $this->forum_id);
-
-		$topic_row['IMCGER_AT_FORUM_PARENTS'] = $links_forum;
-		$event['topic_row'] = $topic_row;
 	}
 }

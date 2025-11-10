@@ -7,6 +7,10 @@
  *
  #}
 
+{% if IMCGER_DISPLAY_ACTIVE_POSITION %}
+	{% INCLUDEJS '@imcger_activetopics/activetopics.js' %}
+{% endif %}
+
 {% if S_DISPLAY_ACTIVE and topicrow.IMCGER_AT_FORUM_PARENTS %}
 	&raquo; {{ lang('IN') }} {{ topicrow.IMCGER_AT_FORUM_PARENTS }}
 {% endif %}
