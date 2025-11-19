@@ -14,8 +14,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class at_main_listener implements EventSubscriberInterface
 {
-	private int  $forum_id;
-	private bool $show_parent;
+	private int    $category_id;
+	private bool   $show_parent;
 
 	public function __construct
 	(
@@ -40,7 +40,7 @@ class at_main_listener implements EventSubscriberInterface
 	 */
 	public function get_forum_data(object $event): void
 	{
-		$this->forum_id		= $event['forum_data']['forum_id'];
+		$this->category_id	= $event['forum_data']['forum_id'];
 		$this->show_parent	= $event['forum_data']['imcger_at_show_forum_parents'];
 
 		$this->template->assign_vars([
@@ -75,7 +75,7 @@ class at_main_listener implements EventSubscriberInterface
 				$links_forum	= strlen($links_forum) == 0 ? $link_forum : $link_forum . ' &raquo; ' . $links_forum;
 				$topic_forum_id = $row['parent_id'];
 
-			} while ($row['parent_id'] != 0 && $row['parent_id'] != $this->forum_id);
+			} while ($row['parent_id'] != 0 && $row['parent_id'] != $this->category_id);
 
 			$topic_row['IMCGER_AT_FORUM_PARENTS'] = $links_forum;
 			$event['topic_row'] = $topic_row;

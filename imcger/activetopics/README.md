@@ -30,6 +30,12 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 
 ## Changelog
 
+### v1.2.0 (19-11-2025)
+- Use acp template event to insert forum settings
+- Use `composer.json` requirements in `ext.php`
+- Use event to get forum data in main listener
+- Template event files merged
+
 ### v1.1.1 (13-10-2024)
 - Minor change
 

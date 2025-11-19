@@ -23,14 +23,17 @@ class ext_requirements
 		$this->ext_manager = $phpbb_container->get('ext.manager');
 		$this->language	   = $phpbb_container->get('language');
 
-		if (strlen($ext_name))
-		{
-			$this->set_ext_name($ext_name);
-		}
+		$this->set_ext_name($ext_name);
 	}
 
-	public function set_ext_name(string $ext_name)
+	public function set_ext_name(string $ext_name = '')
 	{
+		if (empty($ext_name))
+		{
+			preg_match('#ext\/([0-9 a-z]+\/[0-9 a-z]+)#', __DIR__, $matches);
+			$ext_name = $matches[1];
+		}
+
 		$name = explode('/', $ext_name)[1];
 		$this->language->add_lang('info_acp_' . $name, $ext_name);
 		$this->metadata = $this->ext_manager->create_extension_metadata_manager($ext_name)->get_metadata();
@@ -38,15 +41,16 @@ class ext_requirements
 
 	public function check_php()
 	{
-		$require_php = explode(',', $this->metadata['require']['php'] ?? '');
+		$require_str = preg_replace('#[,\s]+#', ' ', trim($this->metadata['require']['php'] ?? ''));
+		$require_php = explode(' ', $require_str);
 
 		if (strlen($require_php[0]))
 		{
-			if (trim($require_php[0])[0] == '^')
+			if ($require_php[0][0] == '^')
 			{
 				$require_php = $this->convert_caret_version($require_php[0]);
 			}
-			else if (trim($require_php[0])[0] == '~')
+			else if ($require_php[0][0] == '~')
 			{
 				$require_php = $this->convert_tilde_version($require_php[0]);
 			}
@@ -67,15 +71,16 @@ class ext_requirements
 
 	public function check_phpbb()
 	{
-		$require_phpbb = explode(',', $this->metadata['require']['phpbb/phpbb'] ?? $this->metadata['extra']['soft-require']['phpbb/phpbb'] ?? '');
+		$require_str   = preg_replace('#[,\s]+#', ' ', trim($this->metadata['require']['phpbb/phpbb'] ?? $this->metadata['extra']['soft-require']['phpbb/phpbb'] ?? ''));
+		$require_phpbb = explode(' ', $require_str);
 
 		if (strlen($require_phpbb[0]))
 		{
-			if (trim($require_phpbb[0])[0] == '^')
+			if ($require_phpbb[0][0] == '^')
 			{
 				$require_phpbb = $this->convert_caret_version($require_phpbb[0]);
 			}
-			else if (trim($require_phpbb[0])[0] == '~')
+			else if ($require_phpbb[0][0] == '~')
 			{
 				$require_phpbb = $this->convert_tilde_version($require_phpbb[0]);
 			}
