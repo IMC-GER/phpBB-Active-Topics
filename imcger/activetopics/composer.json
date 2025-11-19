@@ -3,8 +3,8 @@
     "type": "phpbb-extension",
     "description": "This extension enables settings for active topics.",
     "homepage": "https://github.com/IMC-GER/phpBB-Active-Topics/",
-    "version": "1.2.0-rc2",
-    "time": "2025-11-15",
+    "version": "1.2.0-rc3",
+    "time": "2025-11-19",
     "keywords": ["phpbb", "extension", "activetopics"],
     "license": "GPL-2.0-only",
     "authors": [

@@ -14,8 +14,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class at_main_listener implements EventSubscriberInterface
 {
-	private int  $forum_id;
-	private bool $show_parent;
+	private string $forum_name;
+	private int    $forum_id;
+	private int	   $parent_id;
+	private bool   $show_parent;
 
 	public function __construct
 	(
@@ -40,7 +42,9 @@ class at_main_listener implements EventSubscriberInterface
 	 */
 	public function get_forum_data(object $event): void
 	{
+		$this->forum_name	= $event['forum_data']['forum_name'];
 		$this->forum_id		= $event['forum_data']['forum_id'];
+		$this->parent_id	= $event['forum_data']['parent_id'];
 		$this->show_parent	= $event['forum_data']['imcger_at_show_forum_parents'];
 
 		$this->template->assign_vars([
@@ -61,13 +65,21 @@ class at_main_listener implements EventSubscriberInterface
 
 			do
 			{
-				$sql = 'SELECT forum_name, parent_id
-						FROM ' . FORUMS_TABLE . '
-						WHERE forum_id = ' . (int) $topic_forum_id;
+				if (empty($row))
+				{
+					$row['parent_id']  = $this->parent_id;
+					$row['forum_name'] = $this->forum_name;
+				}
+				else
+				{
+					$sql = 'SELECT forum_name, parent_id
+							FROM ' . FORUMS_TABLE . '
+							WHERE forum_id = ' . (int) $topic_forum_id;
 
-				$result = $this->db->sql_query($sql);
-				$row = $this->db->sql_fetchrow($result);
-				$this->db->sql_freeresult($result);
+					$result = $this->db->sql_query($sql);
+					$row = $this->db->sql_fetchrow($result);
+					$this->db->sql_freeresult($result);
+				}
 
 				$u_view_forum = append_sid("{$this->phpbb_root_path}viewforum.{$this->php_ext}", 'f=' . $topic_forum_id);
 				$link_forum	  = '<a href="' . $u_view_forum . '">' . $row['forum_name'] . '</a>';
