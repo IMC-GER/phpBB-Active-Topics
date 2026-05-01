@@ -32,10 +32,15 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 ## Changelog
 
 ### v1.2.0 (01-05-2026)
+- Removed unused language class
+- Improved sql-query for parent forums
+- Renamed `activetopics.js` to `imcger_activetopics.js`
+- Var names changed in acp listener
+- Method name changed in main listener
 - Use acp template event to insert forum settings
 - Use `composer.json` requirements in `ext.php`
+  - Added class `imcger_ext_requirements`
 - Use event to get forum data in main listener
-- Template event files merged
 
 ### v1.1.1 (13-10-2024)
 - Minor change
