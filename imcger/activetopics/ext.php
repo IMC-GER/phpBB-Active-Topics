@@ -19,7 +19,7 @@ class ext extends \phpbb\extension\base
 			return false;
 		}
 
-		$ext_requirements = new \imcger\activetopics\core\ext_requirements($this->extension_name);
+		$ext_requirements = new \imcger\activetopics\core\imcger_ext_requirements($this->extension_name);
 
 		return $ext_requirements->check();
 	}

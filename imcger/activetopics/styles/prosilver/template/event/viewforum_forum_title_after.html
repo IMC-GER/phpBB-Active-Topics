@@ -1,0 +1,12 @@
+{#
+ *	Active Topics
+ *	An extension for the phpBB Forum Software package.
+ *
+ *	@copyright (c) 2023, Thorsten Ahlers
+ *	@license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+{% if S_DISPLAY_ACTIVE and IMCGER_DISPLAY_ACTIVE_POSITION %}
+	{% INCLUDEJS '@imcger_activetopics/imcger_activetopics_pos.js' %}
+{% endif %}

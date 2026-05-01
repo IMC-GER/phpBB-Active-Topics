@@ -17,7 +17,6 @@ class at_acp_listener implements EventSubscriberInterface
 	public function __construct
 	(
 		protected \phpbb\request\request $request,
-		protected \phpbb\language\language $language,
 	)
 	{
 	}

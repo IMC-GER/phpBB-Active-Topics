@@ -10,7 +10,7 @@
 
 namespace imcger\activetopics\core;
 
-class ext_requirements
+class imcger_ext_requirements
 {
 	protected $metadata;
 	protected $ext_manager;
