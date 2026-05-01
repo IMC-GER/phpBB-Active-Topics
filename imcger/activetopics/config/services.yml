@@ -3,7 +3,6 @@ services:
         class: imcger\activetopics\event\at_acp_listener
         arguments:
             - '@request'
-            - '@language'
         tags:
             - { name: event.listener }
             

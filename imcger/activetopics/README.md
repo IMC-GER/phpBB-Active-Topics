@@ -15,7 +15,8 @@ In "Forums" -> "Manage Forums" -> "Edit Forum"
 - [Forum](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/forum.png)
 
 ## Requirements
-- phpBB 3.3.0 or higher
+- phpBB 3.3.16 or higher
+- php 8.0.0 or higher
 
 ## Installation
 Copy the extension to `phpBB3/ext/imcger/activetopics`.
@@ -30,7 +31,7 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 
 ## Changelog
 
-### v1.2.0 (19-11-2025)
+### v1.2.0 (01-05-2026)
 - Use acp template event to insert forum settings
 - Use `composer.json` requirements in `ext.php`
 - Use event to get forum data in main listener
