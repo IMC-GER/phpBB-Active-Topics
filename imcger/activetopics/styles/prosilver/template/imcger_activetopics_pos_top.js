@@ -14,5 +14,6 @@
 	// Move active topics to the top of forumlist
 	if ($('.forumbg dt#active_topics').length) {
 		$('.forabg').first().before($('.forumbg'));
+		$('.forumbg').first().before($('.action-bar.bar-top'));
 	}
 })(jQuery); // Avoid conflicts with other libraries

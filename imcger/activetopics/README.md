@@ -7,16 +7,18 @@ It adds the link to the forum from which the topic originated to the list of act
 
 #### Settings in Administration Control Panel
 In "Forums" -> "Manage Forums" -> "Edit Forum"
-- Display active topics above the forums
-- Topics per page
+- Display active topics above or below the category
+- Number of topics per page
+- Number of active topics pages
+- Display parent forums in the active topics topic row
 
 ## Screenshots
-- [ACP](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/acp_en.png)
-- [Forum](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/forum.png)
+- [ACP](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/acp_130.png)
+- [Forum](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/category_130.png)
 
 ## Requirements
-- phpBB 3.3.16 or higher
-- php 8.0.0 or higher
+- phpBB >= 3.3.16, < 4.0.0-dev  
+- php >= 8.0.0  
 
 ## Installation
 Copy the extension to `phpBB3/ext/imcger/activetopics`.
@@ -30,6 +32,9 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 - Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" extension.
 
 ## Changelog
+
+### v1.3.0-b1 (15-05-2026)
+- Added: Display active topics in multiple pages
 
 ### v1.2.0 (01-05-2026)
 - Removed unused language class
