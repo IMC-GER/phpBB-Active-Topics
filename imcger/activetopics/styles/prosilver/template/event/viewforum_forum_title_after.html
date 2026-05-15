@@ -7,6 +7,10 @@
  *
  #}
 
-{% if S_DISPLAY_ACTIVE and IMCGER_DISPLAY_ACTIVE_POSITION %}
-	{% INCLUDEJS '@imcger_activetopics/imcger_activetopics_pos.js' %}
+{% if S_DISPLAY_ACTIVE and IMCGER_AT_DISPLAY_POS %}
+	{% INCLUDEJS '@imcger_activetopics/imcger_activetopics_pos_top.js' %}
+{% endif %}
+
+{% if S_DISPLAY_ACTIVE and not IMCGER_AT_DISPLAY_POS %}
+	{% INCLUDEJS '@imcger_activetopics/imcger_activetopics_pos_bottom.js' %}
 {% endif %}

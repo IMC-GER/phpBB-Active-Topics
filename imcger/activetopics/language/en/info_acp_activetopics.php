@@ -38,9 +38,11 @@ $lang = array_merge($lang, [
 	'IMCGER_AT_REQUIRE_PHP'		=> 'Yours php Version is %1$s. Version %2$s is required.',
 	'IMCGER_AT_REQUIRE_PHPBB'	=> 'Yours phpBB Version is %1$s. Version %2$s is required.',
 
-	'IMCGER_AT_TOPICS_PER_PAGE'				=> 'Active topics per page',
 	'IMCGER_AT_POSITION'					=> 'Display active topics above',
 	'IMCGER_AT_POSITION_EXPLAIN'			=> 'If this setting is set to "Yes", active topics of the selected sub-forums are displayed on the page above this category.',
+	'IMCGER_AT_TOPICS_PER_PAGE'				=> 'Active topics per page',
+	'IMCGER_AT_NUM_PAGES'					=> 'Active topics pages',
+	'IMCGER_AT_NUM_PAGES_EXPLAIN'			=> 'Sets the maximum number of list pages to be displayed for active topics.',
 	'IMCGER_AT_SHOW_FORUM_PARENTS'			=> 'Display parent forums',
 	'IMCGER_AT_SHOW_FORUM_PARENTS_EXPLAIN'	=> 'Display parent forums inside the topic row of active topics.',
 ]);

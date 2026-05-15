@@ -9,8 +9,13 @@ services:
     imcger.activetopics.main_listener:
         class: imcger\activetopics\event\at_main_listener
         arguments:
+            - '@user'
+            - '@config'
             - '@template'
             - '@dbal.conn'
+            - '@request'
+            - '@pagination'
+            - '@language'
             - '%core.root_path%'
             - '%core.php_ext%'
         tags:
