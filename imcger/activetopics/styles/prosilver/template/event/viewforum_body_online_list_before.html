@@ -1,0 +1,32 @@
+{#
+ *	Active Topics
+ *	An extension for the phpBB Forum Software package.
+ *
+ *	@copyright (c) 2023, Thorsten Ahlers
+ *	@license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+{% if S_DISPLAY_ACTIVE %}
+<script>
+	if (document.querySelector('.forumbg dt#active_topics')) {
+		const forumbg	= document.querySelector('.forumbg');
+		const forabg	= document.querySelector('.forabg');
+		const actionBar = document.querySelector('.action-bar.bar-top');
+
+	{% if IMCGER_AT_DISPLAY_POS %}
+		if (forumbg && forabg) {
+			forabg.parentNode.insertBefore(forumbg, forabg);
+		}
+
+		if (actionBar && forumbg) {
+			forumbg.parentNode.insertBefore(actionBar, forumbg);
+		}
+	{% else %}
+		if (actionBar && forumbg) {
+			forumbg.parentNode.insertBefore(actionBar, forumbg.nextSibling); 
+		}
+	{% endif %}
+	}
+</script> 
+{% endif %}

@@ -125,9 +125,10 @@ class at_main_listener implements EventSubscriberInterface
 	{
 		if ($this->show_parent)
 		{
-			$topic_row		= $event['topic_row'];
-			$links_forum	= [];
-			$topic_forum_id	= $topic_row['FORUM_ID'];
+			$topic_row		  = $event['topic_row'];
+			$links_forum	  = [];
+			$topic_forum_id	  = $topic_row['FORUM_ID'];
+			$current_forum_id = $this->request->variable('f', 0);
 
 			$sql_array = [
 				'SELECT'    => 'f.forum_name, f.forum_id',
@@ -137,10 +138,15 @@ class at_main_listener implements EventSubscriberInterface
 						'FROM' => [FORUMS_TABLE => 'ft'],
 						'ON'   => 'ft.forum_id = ' . (int) $topic_forum_id,
 					],
+					[
+						'FROM' => [FORUMS_TABLE => 'fts'],
+						'ON'   => 'fts.forum_id = ' . (int) $current_forum_id,
+					],
 				],
 				'WHERE'     => 'f.forum_id = ' . (int) $topic_forum_id . '
-						OR f.left_id < ft.left_id
-						AND f.right_id > ft.right_id',
+						OR (f.left_id < ft.left_id
+							AND f.right_id > ft.right_id
+							AND f.right_id < fts.right_id )',
 				'ORDER_BY'  => 'f.left_id ASC',
 			];
 

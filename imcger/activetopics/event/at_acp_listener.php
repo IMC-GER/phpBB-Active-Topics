@@ -63,9 +63,9 @@ class at_acp_listener implements EventSubscriberInterface
 	public function acp_manage_forums_display_form(object $event): void
 	{
 		$template_data = $event['template_data'];
-		$template_data['IMCGER_AT_DISPLAY_POS'] = $event['forum_data']['imcger_display_active_position'];
-		$template_data['IMCGER_AT_NUM_PAGES']			 = $event['forum_data']['imcger_at_num_pages'];
-		$template_data['IMCGER_AT_SHOW_FORUM_PARENTS']	 = $event['forum_data']['imcger_at_show_forum_parents'];
+		$template_data['IMCGER_AT_DISPLAY_POS']		   = $event['forum_data']['imcger_display_active_position'];
+		$template_data['IMCGER_AT_NUM_PAGES']		   = $event['forum_data']['imcger_at_num_pages'];
+		$template_data['IMCGER_AT_SHOW_FORUM_PARENTS'] = $event['forum_data']['imcger_at_show_forum_parents'];
 		$event['template_data'] = $template_data;
 	}
 }
