@@ -1,0 +1,29 @@
+name: Tests
+
+on:
+  push:           # Run tests when commits are pushed to these branches in your repo,
+    branches:     # ... or remove this branches section to run tests on all your branches
+      - main      # Main production branch
+      - master    # Legacy or alternative main branch
+      - dev/*     # Any feature branches under "dev/", e.g., dev/new-feature
+  
+  pull_request:   # Run tests when pull requests are made on these branches in your repo,
+    branches:     # ... or remove this branches section to run tests on all your branches
+      - main
+      - master
+      - dev/*
+
+jobs:
+  call-tests:
+    name: Extension tests
+    uses: phpbb-extensions/test-framework/.github/workflows/tests.yml@3.3.x
+    with:
+      EXTNAME: imcger/activetopics   # Your extension vendor/package name (required)
+      PHPBB_BRANCH: '3.3.x'
+      RUN_MYSQL_JOBS: 1
+      RUN_PGSQL_JOBS: 1
+      RUN_MSSQL_JOBS: 1
+      RUN_WINDOWS_JOBS: 1
+      RUN_FUNCTIONAL_TESTS: 1
+      PRIMARY_PHP_VERSION: '8.5'
+      PHP_VERSION_MATRIX: '["8.0", "8.1", "8.2", "8.3", "8.4", "8.5"]'

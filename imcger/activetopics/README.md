@@ -5,6 +5,8 @@ If you configure a forum as a category, the active topics of the sub-forums can 
 This extension allows you to define the position of the active topics and the number of topics displayed.
 It adds the link to the forum from which the topic originated to the list of active topics.
 
+[![Tests](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml)
+
 #### Settings in Administration Control Panel
 In "Forums" -> "Manage Forums" -> "Edit Forum"
 - Display active topics above or below the category
