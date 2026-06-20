@@ -1,0 +1,16 @@
+{#
+ *	Active Topics
+ *	An extension for the phpBB Forum Software package.
+ *
+ *	@copyright (c) 2023, Thorsten Ahlers
+ *	@license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+	<fieldset>
+		<legend>{{ lang('IMCGER_AT_SETTINGS') }}</legend>
+		<dl>
+			<dt><label for="imcger_at_result_limit">{{ lang('IMCGER_AT_RESULT_LIMIT') ~ lang('COLON') }}</label><br /><span>{{ lang('IMCGER_AT_RESULT_LIMIT_EXPLAIN') }}</span></dt>
+			<dd><input type="number" min="0" max="9999" name="imcger_at_result_limit" value="{{ IMCGER_AT_RESULT_LIMIT }}" > {{ lang('DAYS') }}</dd>
+		</dl>
+	</fieldset>

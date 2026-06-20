@@ -17,6 +17,8 @@ class at_acp_listener implements EventSubscriberInterface
 	public function __construct
 	(
 		protected \phpbb\request\request $request,
+		protected \phpbb\config\config $config,
+		protected \phpbb\template\template $template,
 	)
 	{
 	}
@@ -27,6 +29,7 @@ class at_acp_listener implements EventSubscriberInterface
 			'core.acp_manage_forums_request_data'	 => 'acp_manage_forums_request_data',
 			'core.acp_manage_forums_initialise_data' => 'acp_manage_forums_initialise_data',
 			'core.acp_manage_forums_display_form'	 => 'acp_manage_forums_display_form',
+			'core.adm_page_header_after'			 => 'adm_page_header_after',
 		];
 	}
 
@@ -67,5 +70,26 @@ class at_acp_listener implements EventSubscriberInterface
 		$template_data['IMCGER_AT_NUM_PAGES']		   = $event['forum_data']['imcger_at_num_pages'];
 		$template_data['IMCGER_AT_SHOW_FORUM_PARENTS'] = $event['forum_data']['imcger_at_show_forum_parents'];
 		$event['template_data'] = $template_data;
+	}
+
+	/**
+	 * ACP Search settings
+	 */
+	public function adm_page_header_after(object $event): void
+	{
+		$submit		= $this->request->is_set_post('submit');
+		$search_set = $this->request->variable('i', '') == 'acp_search' && $this->request->variable('mode', '') == 'settings';
+
+		if (!$submit && $search_set)
+		{
+			$this->template->assign_vars([
+				'IMCGER_AT_RESULT_LIMIT' => $this->config['imcger_at_result_limit'],
+			]);
+		}
+
+		if ($submit && $search_set && check_link_hash($this->request->variable('hash', ''), 'acp_search'))
+		{
+			$this->config->set('imcger_at_result_limit', $this->request->variable('imcger_at_result_limit', 7));
+		}
 	}
 }
