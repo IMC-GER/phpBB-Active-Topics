@@ -35,12 +35,13 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 
 ## Changelog
 
-### v1.3.0-b2 (18-05-2026)
+### v1.3.0 (20-07-2026)
+- Fixed: In the version-checking class, the logical OR was used instead of the bitwise OR
+- Changed: Use just one SQL query to retrieve the parent forums
 - Changed: Display only parent forums that are subordinate to the current category
 - Changed: jQuery was replaced with vanilla JS, because the page flickered when loading
-
-### v1.3.0-b1 (15-05-2026)
-- Added: Display active topics in multiple pages
+- Changed: Update `license.txt`
+- Added: Display active topics in multiple pages (pagination)
 
 ### v1.2.0 (01-05-2026)
 - Removed unused language class
