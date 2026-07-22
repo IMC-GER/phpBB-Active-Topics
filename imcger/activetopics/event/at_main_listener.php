@@ -47,6 +47,7 @@ class at_main_listener implements EventSubscriberInterface
 			'core.viewforum_get_topic_ids_data'	=> 'viewforum_get_topic_ids_data',
 			'core.viewforum_modify_topics_data'	=> 'viewforum_modify_topics_data',
 			'core.viewforum_modify_topicrow' 	=> 'set_template_vars_topic_row',
+			'core.search_modify_param_after'	=> 'search_modify_param_after',
 		];
 	}
 
@@ -179,6 +180,25 @@ class at_main_listener implements EventSubscriberInterface
 
 			$topic_row['IMCGER_AT_FORUM_PARENTS'] = join(' &raquo; ', $this->links_forums[$row['topic_id']]);
 			$event['topic_row'] = $topic_row;
+		}
+	}
+
+	public function search_modify_param_after(object $event): void
+	{
+		if ($event['search_id'] == 'active_topics')
+		{
+			$sql = $event['sql'];
+
+			$result_limit = $this->config['imcger_at_result_limit'];
+
+			$last_post_time_sql = $result_limit > 0 ? ('AND t.topic_last_post_time > ' . (time() - ($result_limit * 24 * 3600))) : '';
+
+			// RegEx: findet "AND t.topic_last_post_time > <Zahl>"
+			$pattern = '/AND\s+t\.topic_last_post_time\s*>\s*\d+/';
+
+			$sql = preg_replace($pattern, $last_post_time_sql, $sql);
+
+			$event['sql'] = $sql;
 		}
 	}
 

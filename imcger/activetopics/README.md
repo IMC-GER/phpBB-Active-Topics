@@ -14,12 +14,16 @@ In "Forums" -> "Manage Forums" -> "Edit Forum"
 - Number of active topics pages
 - Display parent forums in the active topics topic row
 
+In "General" -> "Search settings" -> "Active Topics Settings"
+- Number of days for the active topic search
+
+
 ## Screenshots
 - [ACP](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/acp_130.png)
 - [Forum](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/category_130.png)
 
 ## Requirements
-- phpBB >= 3.3.16, < 4.0.0-dev  
+- phpBB >= 3.3.18, < 4.0.0-dev  
 - php >= 8.0.0  
 
 ## Installation

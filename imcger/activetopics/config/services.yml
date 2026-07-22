@@ -3,6 +3,8 @@ services:
         class: imcger\activetopics\event\at_acp_listener
         arguments:
             - '@request'
+            - '@config'
+            - '@template'
         tags:
             - { name: event.listener }
             
