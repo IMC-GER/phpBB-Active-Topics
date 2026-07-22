@@ -173,7 +173,9 @@ class at_main_listener implements EventSubscriberInterface
 		{
 			$sql = $event['sql'];
 
-			$last_post_time_sql = $this->config['imcger_at_result_limit'] ? 'AND t.topic_last_post_time > ' . (time() - ($this->config['imcger_at_result_limit'] * 24 * 3600)) : '';
+			$result_limit = $this->config['imcger_at_result_limit'];
+
+			$last_post_time_sql = $result_limit > 0 ? ('AND t.topic_last_post_time > ' . (time() - ($result_limit * 24 * 3600))) : '';
 
 			// RegEx: findet "AND t.topic_last_post_time > <Zahl>"
 			$pattern = '/AND\s+t\.topic_last_post_time\s*>\s*\d+/';

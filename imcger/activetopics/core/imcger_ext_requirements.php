@@ -87,7 +87,7 @@ class imcger_ext_requirements
 
 			foreach ($require_phpbb as $value)
 			{
-				$required = $this->split_compare_data(htmlspecialchars_decode($value, ENT_QUOTES || ENT_SUBSTITUTE || ENT_HTML5));
+				$required = $this->split_compare_data(htmlspecialchars_decode($value, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5));
 
 				if (!phpbb_version_compare(PHPBB_VERSION, $required['version'], $required['operator']))
 				{
