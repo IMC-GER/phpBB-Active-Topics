@@ -35,6 +35,11 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 
 ## Changelog
 
+### v1.3.1 (15-08-2026)
+- Fixed: The SQL query to check the number of topics does not work with PostgreSQL.
+- Changed: Language variable improved.
+- Changed: The SearchParams variable has been replaced by the event's variable.
+
 ### v1.3.0 (20-07-2026)
 - Fixed: In the version-checking class, the logical OR was used instead of the bitwise OR
 - Changed: Use just one SQL query to retrieve the parent forums
