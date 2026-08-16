@@ -77,6 +77,7 @@ class at_main_listener implements EventSubscriberInterface
 			// Count topics
 			$sql_count_ary = $event['sql_ary'];
 			$sql_count_ary['SELECT'] = 'COUNT(t.topic_id) as num_topics';
+			unset($sql_count_ary['ORDER_BY']);
 
 			$sql = $this->db->sql_build_query('SELECT', $sql_count_ary);
 			$this->db->sql_query($sql);
@@ -122,7 +123,7 @@ class at_main_listener implements EventSubscriberInterface
 
 			if (count($topic_list) && $this->show_parent)
 			{
-				$current_forum_id = $this->request->variable('f', 0);
+				$current_forum_id = $event['forum_id'];
 
 				$sql_array = [
 					'SELECT'    => 't.topic_id, f.forum_name, f.forum_id',

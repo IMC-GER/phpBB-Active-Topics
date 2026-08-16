@@ -35,8 +35,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, [
-	'IMCGER_AT_REQUIRE_PHP'		=> 'Yours php Version is %1$s. Version %2$s is required.',
-	'IMCGER_AT_REQUIRE_PHPBB'	=> 'Yours phpBB Version is %1$s. Version %2$s is required.',
+	'IMCGER_AT_REQUIRE_PHP'		=> 'Your php Version is %1$s. Version %2$s is required.',
+	'IMCGER_AT_REQUIRE_PHPBB'	=> 'Your phpBB Version is %1$s. Version %2$s is required.',
 
 	'IMCGER_AT_POSITION'					=> 'Display active topics above',
 	'IMCGER_AT_POSITION_EXPLAIN'			=> 'If this setting is set to "Yes", active topics of the selected sub-forums are displayed on the page above this category.',
