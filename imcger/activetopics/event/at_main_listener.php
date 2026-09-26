@@ -131,7 +131,8 @@ class at_main_listener implements EventSubscriberInterface
 					'LEFT_JOIN' => [
 						[
 							'FROM' => [TOPICS_TABLE => 't'],
-							'ON'   => $this->db->sql_in_set('t.topic_id', $topic_list),
+							'ON'   => $this->db->sql_in_set('t.topic_id', $topic_list) . '
+									AND t.topic_status <> ' . ITEM_MOVED,
 						],
 						[
 							'FROM' => [FORUMS_TABLE => 'ft'],
@@ -156,13 +157,12 @@ class at_main_listener implements EventSubscriberInterface
 
 				foreach ($forums as $forum)
 				{
-					if (!isset($this->links_forums[$forum['topic_id']]))
-					{
-						$this->links_forums[$forum['topic_id']] = [];
-					}
-
 					$u_view_forum = append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $forum['forum_id']);
-					$this->links_forums[$forum['topic_id']]  = array_merge($this->links_forums[$forum['topic_id']], ['<a href="' . $u_view_forum . '">' . $forum['forum_name'] . '</a>']);
+
+					$this->links_forums[$forum['topic_id']][] = [
+						'URL'	=> $u_view_forum,
+						'NAME'	=> $forum['forum_name'],
+					];
 				}
 			}
 		}
@@ -173,12 +173,14 @@ class at_main_listener implements EventSubscriberInterface
 	 */
 	public function set_template_vars_topic_row(object $event): void
 	{
-		if (count($this->links_forums))
+		$row = $event['row'];
+
+		if (isset($this->links_forums[$row['topic_id']]))
 		{
 			$topic_row	= $event['topic_row'];
-			$row		= $event['row'];
 
-			$topic_row['IMCGER_AT_FORUM_PARENTS'] = join(' &raquo; ', $this->links_forums[$row['topic_id']]);
+			$topic_row['imcger_at_forum_parents'] = $this->links_forums[$row['topic_id']];
+
 			$event['topic_row'] = $topic_row;
 		}
 	}

@@ -35,6 +35,11 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 
 ## Changelog
 
+### v1.3.2 (25-09-2026)
+- Fixed: PHP error `Undefined array key` when moved topic in category.
+- Changed: The trim() function is backward-compatible with PHP 8.6.
+- Changed: Use TWIG to build html code for parent forum links.
+
 ### v1.3.1 (15-08-2026)
 - Fixed: The SQL query to check the number of topics does not work with PostgreSQL.
 - Changed: Language variable improved.

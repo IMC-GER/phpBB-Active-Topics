@@ -7,6 +7,12 @@
  *
  #}
 
-{% if S_DISPLAY_ACTIVE and topicrow.IMCGER_AT_FORUM_PARENTS %}
-	&raquo; {{ lang('IN') }} {{ topicrow.IMCGER_AT_FORUM_PARENTS }}
+{% if S_DISPLAY_ACTIVE and topicrow.imcger_at_forum_parents %}
+	&raquo; {{ lang('IN') }}
+	{% for parent in topicrow.imcger_at_forum_parents -%}
+		<a href="{{ parent.URL|raw }}">{{ parent.NAME }}</a>
+		{% if not loop.last -%}
+			&raquo;
+		{% endif -%}
+	{% endfor -%}
 {% endif %}
