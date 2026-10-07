@@ -35,6 +35,11 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 
 ## Changelog
 
+### v1.4.0-b1 (07-10-2026)
+- Changed: The position and parent forum settings from radio button to select box.
+- Added: Display forum inside the topic row of active topics.
+- Added: Store the sort days in a cookie and load the cookie variable as the default setting.
+
 ### v1.3.2 (25-09-2026)
 - Fixed: PHP error `Undefined array key` when moved topic in category.
 - Changed: The trim() function is backward-compatible with PHP 8.6.

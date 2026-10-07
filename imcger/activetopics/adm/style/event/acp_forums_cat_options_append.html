@@ -8,8 +8,12 @@
  #}
 		<dl>
 			<dt><label for="imcger_display_active_position">{{ lang('IMCGER_AT_POSITION') ~ lang('COLON') }}</label><br><span>{{ lang('IMCGER_AT_POSITION_EXPLAIN') }}</span></dt>
-			<dd><label><input type="radio" class="radio" name="imcger_display_active_position" value="1"{{ IMCGER_AT_DISPLAY_POS == 1 ? ' checked' }}> {{ lang('YES') }}</label>
-				<label><input type="radio" class="radio" name="imcger_display_active_position" value="0"{{ IMCGER_AT_DISPLAY_POS == 0 ? ' checked' }}> {{ lang('NO') }}</label></dd>
+			<dd>
+				<select id="imcger_display_active_position" name="imcger_display_active_position">
+					<option value="1"{{ IMCGER_AT_DISPLAY_POS == 1 ? ' selected' }}>{{ lang('IMCGER_AT_TOP') }}</option>
+					<option value="0"{{ IMCGER_AT_DISPLAY_POS == 0 ? ' selected' }}>{{ lang('IMCGER_AT_BOTTOM') }}</option>
+				</select>
+			</dd>
 		</dl>
 		<dl>
 			<dt><label for="topics_per_page">{{ lang('IMCGER_AT_TOPICS_PER_PAGE') ~ lang('COLON') }}</label><br ><span>{{ lang('FORUM_TOPICS_PAGE_EXPLAIN') }}</span></dt>
@@ -21,6 +25,11 @@
 		</dl>
 		<dl>
 			<dt><label for="imcger_at_show_forum_parents">{{ lang('IMCGER_AT_SHOW_FORUM_PARENTS') ~ lang('COLON') }}</label><br><span>{{ lang('IMCGER_AT_SHOW_FORUM_PARENTS_EXPLAIN') }}</span></dt>
-			<dd><label><input type="radio" class="radio" name="imcger_at_show_forum_parents" value="1"{{ IMCGER_AT_SHOW_FORUM_PARENTS == 1 ? ' checked' }}> {{ lang('YES') }}</label>
-				<label><input type="radio" class="radio" name="imcger_at_show_forum_parents" value="0"{{ IMCGER_AT_SHOW_FORUM_PARENTS == 0 ? ' checked' }}> {{ lang('NO') }}</label></dd>
+			<dd>
+				<select id="imcger_at_show_forum_parents" name="imcger_at_show_forum_parents">
+					<option value="0"{{ IMCGER_AT_SHOW_FORUM_PARENTS == 0 ? ' selected' }}>{{ lang('IMCGER_AT_NONE') }}</option>
+					<option value="2"{{ IMCGER_AT_SHOW_FORUM_PARENTS == 2 ? ' selected' }}>{{ lang('IMCGER_AT_FORUM') }}</option>
+					<option value="1"{{ IMCGER_AT_SHOW_FORUM_PARENTS == 1 ? ' selected' }}>{{ lang('IMCGER_AT_FORUM_PARENTS') }}</option>
+				</select>
+			</dd>
 		</dl>

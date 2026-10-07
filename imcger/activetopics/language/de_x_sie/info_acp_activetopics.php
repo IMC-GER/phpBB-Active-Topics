@@ -38,11 +38,16 @@ $lang = array_merge($lang, [
 	'IMCGER_AT_REQUIRE_PHP'		=> 'Ihre php Version ist %1$s. Benötigt wird eine Version %2$s.',
 	'IMCGER_AT_REQUIRE_PHPBB'	=> 'Ihre phpBB Version ist %1$s. Benötigt wird eine Version %2$s.',
 
-	'IMCGER_AT_POSITION'					=> 'Aktive Themen oberhalb anzeigen',
-	'IMCGER_AT_POSITION_EXPLAIN'			=> 'Wenn diese Einstellung auf „Ja“ gesetzt wird, werden aktive Themen der gewählten Unterforen auf der Seite oberhalb dieser Kategorie angezeigt.',
+	'IMCGER_AT_POSITION'					=> 'Anzeigeort',
+	'IMCGER_AT_POSITION_EXPLAIN'			=> 'Wählen Sie aus, ob aktive Themen oberhalb oder unterhalb der Kategorie angezeigt werden sollen.',
+	'IMCGER_AT_TOP'							=> 'Ansicht oben',
+	'IMCGER_AT_BOTTOM'						=> 'Ansicht unten',
 	'IMCGER_AT_TOPICS_PER_PAGE'				=> 'Aktive Themen pro Seite',
 	'IMCGER_AT_NUM_PAGES'					=> 'Aktive Themen Anzahl der Seiten',
 	'IMCGER_AT_NUM_PAGES_EXPLAIN'			=> 'Setzt die maximale Anzahl der Listenseiten , die für aktive Themen angezeigt werden sollen.',
 	'IMCGER_AT_SHOW_FORUM_PARENTS'			=> 'Übergeordnete Foren anzeigen',
 	'IMCGER_AT_SHOW_FORUM_PARENTS_EXPLAIN'	=> 'Übergeordnete Foren in der Liste der aktiven Themen anzeigen.',
+	'IMCGER_AT_NONE'						=> 'Keine',
+	'IMCGER_AT_FORUM'						=> 'Forum',
+	'IMCGER_AT_FORUM_PARENTS'				=> 'Übergeordnete Foren',
 ]);
