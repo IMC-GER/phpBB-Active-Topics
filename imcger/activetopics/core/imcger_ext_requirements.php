@@ -16,12 +16,15 @@ class imcger_ext_requirements
 	protected $ext_manager;
 	protected $language;
 
-	public function __construct(string $ext_name = '')
+	public function __construct
+	(
+		\phpbb\extension\manager $ext_manager,
+		\phpbb\language\language $language,
+		string $ext_name = ''
+	)
 	{
-		global $phpbb_container;
-
-		$this->ext_manager = $phpbb_container->get('ext.manager');
-		$this->language	   = $phpbb_container->get('language');
+		$this->ext_manager = $ext_manager;
+		$this->language	   = $language;
 
 		$this->set_ext_name($ext_name);
 	}
@@ -34,14 +37,12 @@ class imcger_ext_requirements
 			$ext_name = $matches[1];
 		}
 
-		$name = explode('/', $ext_name)[1];
-		$this->language->add_lang('info_acp_' . $name, $ext_name);
 		$this->metadata = $this->ext_manager->create_extension_metadata_manager($ext_name)->get_metadata();
 	}
 
 	public function check_php()
 	{
-		$require_str = preg_replace('#[,\s]+#', ' ', trim($this->metadata['require']['php'] ?? '', ' \f\n\r\t\v\x00'));
+		$require_str = preg_replace('#[,\s]+#', ' ', trim($this->metadata['require']['php'] ?? '', ' \f\n\r\t\v'));
 		$require_php = explode(' ', $require_str);
 
 		if (strlen($require_php[0]))
@@ -54,6 +55,10 @@ class imcger_ext_requirements
 			{
 				$require_php = $this->convert_tilde_version($require_php[0]);
 			}
+			else if (preg_match('/[*xX]/', $require_php[0]) === 1)
+			{
+				$require_php = $this->convert_wildcard_version($require_php[0]);
+			}
 
 			foreach ($require_php as $value)
 			{
@@ -61,7 +66,7 @@ class imcger_ext_requirements
 
 				if (!phpbb_version_compare(PHP_VERSION, $required['version'], $required['operator']))
 				{
-					return $this->language->lang('IMCGER_AT_REQUIRE_PHP', PHP_VERSION, $require_php[0] . (isset($require_php[1]) ? ', ' . $require_php[1] : ''));
+					return $this->language->lang('IMCGER_REQUIRE_PHP', PHP_VERSION, $require_php[0] . (isset($require_php[1]) ? ', ' . $require_php[1] : ''));
 				}
 			}
 		}
@@ -71,7 +76,7 @@ class imcger_ext_requirements
 
 	public function check_phpbb()
 	{
-		$require_str   = preg_replace('#[,\s]+#', ' ', trim($this->metadata['require']['phpbb/phpbb'] ?? $this->metadata['extra']['soft-require']['phpbb/phpbb'] ?? '', ' \f\n\r\t\v\x00'));
+		$require_str   = preg_replace('#[,\s]+#', ' ', trim($this->metadata['require']['phpbb/phpbb'] ?? $this->metadata['extra']['soft-require']['phpbb/phpbb'] ?? '', ' \f\n\r\t\v'));
 		$require_phpbb = explode(' ', $require_str);
 
 		if (strlen($require_phpbb[0]))
@@ -84,6 +89,10 @@ class imcger_ext_requirements
 			{
 				$require_phpbb = $this->convert_tilde_version($require_phpbb[0]);
 			}
+			else if (preg_match('/[*xX]/', $require_phpbb[0]) === 1)
+			{
+				$require_phpbb = $this->convert_wildcard_version($require_phpbb[0]);
+			}
 
 			foreach ($require_phpbb as $value)
 			{
@@ -91,7 +100,7 @@ class imcger_ext_requirements
 
 				if (!phpbb_version_compare(PHPBB_VERSION, $required['version'], $required['operator']))
 				{
-					return $this->language->lang('IMCGER_AT_REQUIRE_PHPBB', PHPBB_VERSION, $require_phpbb[0] . (isset($require_phpbb[1]) ? ', ' . $require_phpbb[1] : ''));
+					return $this->language->lang('IMCGER_REQUIRE_PHPBB', PHPBB_VERSION, $require_phpbb[0] . (isset($require_phpbb[1]) ? ', ' . $require_phpbb[1] : ''));
 				}
 			}
 		}
@@ -153,9 +162,9 @@ class imcger_ext_requirements
 				return [">={$major}.0.0", "<{$nextMajor}.0.0"];
 
 			case 2:
-				// ~1.3 → >=1.3.0 <1.4.0
-				$nextMinor = $minor + 1;
-				return [">={$major}.{$minor}.0", "<{$major}.{$nextMinor}.0"];
+				// ~1.3 → >=1.3.0 <2.0.0
+				$nextMajor = $major + 1;
+				return [">={$major}.{$minor}.0", "<{$nextMajor}.0.0"];
 
 			case 3:
 				// ~1.3.2 → >=1.3.2 <1.4.0
@@ -196,5 +205,54 @@ class imcger_ext_requirements
 		}
 
 		return [];
+	}
+
+	protected function convert_wildcard_version(string $version): array
+	{
+		// Only '*' or 'x' → any version
+		if ($version === '*' || strtolower($version) === 'x')
+		{
+			return ['>=0.0.0'];
+		}
+
+		$parts = explode('.', $version);
+
+		// The wildcard must be the last segment
+		$last = strtolower(end($parts));
+		if ($last !== '*' && $last !== 'x')
+		{
+			return [];
+		}
+
+		// remove wildcard
+		array_pop($parts);
+
+		// All remaining segments must be numeric
+		foreach ($parts as $part)
+		{
+			if (!ctype_digit($part))
+			{
+				return [];
+			}
+		}
+
+		$major = (int) ($parts[0] ?? 0);
+		$minor = (int) ($parts[1] ?? 0);
+
+		switch (count($parts))
+		{
+			case 1:
+				// 1.* → >=1.0.0 <2.0.0
+				$nextMajor = $major + 1;
+				return [">={$major}.0.0", "<{$nextMajor}.0.0"];
+
+			case 2:
+				// 1.3.* → >=1.3.0 <1.4.0
+				$nextMinor = $minor + 1;
+				return [">={$major}.{$minor}.0", "<{$major}.{$nextMinor}.0"];
+
+			default:
+				return [];
+		}
 	}
 }

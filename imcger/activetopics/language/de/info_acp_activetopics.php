@@ -35,8 +35,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, [
-	'IMCGER_AT_REQUIRE_PHP'		=> 'Deine php Version ist %1$s. Benötigt wird eine Version %2$s.',
-	'IMCGER_AT_REQUIRE_PHPBB'	=> 'Deine phpBB Version ist %1$s. Benötigt wird eine Version %2$s.',
+	'IMCGER_REQUIRE_PHP'	=> 'Deine php Version ist %1$s. Benötigt wird eine Version %2$s.',
+	'IMCGER_REQUIRE_PHPBB'	=> 'Deine phpBB Version ist %1$s. Benötigt wird eine Version %2$s.',
 
 	'IMCGER_AT_POSITION'					=> 'Anzeigeort',
 	'IMCGER_AT_POSITION_EXPLAIN'			=> 'Wähle ob die aktiven Themen oberhalb oder unter der Kategprie angezeigt werden sollen.',

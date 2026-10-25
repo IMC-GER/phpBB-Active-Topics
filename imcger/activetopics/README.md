@@ -36,6 +36,12 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 
 ## Changelog
 
+### v1.4.0-b3 (25-10-2026)
+- Requirement check
+    - Fixed: The last 0 in the version number is truncated.
+    - Fixed: Incorrect conversion of the version number with a tilde.
+    - Added: Requirement check expanded to include wildcards in version numbers. 
+
 ### v1.4.0-b2 (25-10-2026)
 - Fixed: Wrong label id in html template.
 - Fixed: The memory allocated for an SQL query is not released.
