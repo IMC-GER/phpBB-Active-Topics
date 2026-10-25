@@ -82,24 +82,33 @@ class at_main_listener implements EventSubscriberInterface
 			unset($sql_count_ary['ORDER_BY']);
 
 			$sql = $this->db->sql_build_query('SELECT', $sql_count_ary);
-			$this->db->sql_query($sql);
+			$result = $this->db->sql_query($sql);
 
 			$num_topics		 = (int) $this->db->sql_fetchfield('num_topics');
+			$this->db->sql_freeresult($result);
+
 			$num_pages		 = $event['forum_data']['imcger_at_num_pages'];
 			$topics_per_page = $event['forum_data']['forum_topics_per_page'] ?: $this->config['topics_per_page'];
 			$topics_start	 = $this->request->variable('imc_at_start', 0);
-			$topics_start	 = $this->validate_start($topics_start, $topics_per_page, $num_topics);
 			$num_disp_topics = min($num_pages * $topics_per_page, $num_topics);
+			$topics_start	 = $this->validate_start($topics_start, $topics_per_page, $num_disp_topics);
 
 			// Set a query with a start and limit
 			$event['sql_start'] = $topics_start;
 			$event['sql_limit'] = $topics_per_page;
 
 			// Get URL-parameters for pagination
+			$append_params = $new_params = [];
 			parse_str($this->user->page['query_string'], $append_params);
 			unset($append_params['imc_at_start']);
 
-			$pagination_url = append_sid($this->root_path . $this->user->page['page_name'], $append_params);
+			// Encoding the query parameters of the URL
+			foreach ($append_params as $key => $value)
+			{
+				$new_params[urlencode($key)] = urlencode($this->request->variable($key, '1'));
+			}
+
+			$pagination_url = append_sid($this->root_path . $this->user->page['page_name'], $new_params);
 			$this->pagination->generate_template_pagination($pagination_url, 'pagination',
 				'imc_at_start', $num_disp_topics, $topics_per_page, $topics_start);
 

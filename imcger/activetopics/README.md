@@ -4,6 +4,7 @@
 If you configure a forum as a category, the active topics of the sub-forums can be displayed there.
 This extension allows you to define the position of the active topics and the number of topics displayed.
 It adds the link to the forum from which the topic originated to the list of active topics.
+The display options for Active Topics in Quick Links saved in a Cookie.
 
 [![Tests](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml)
 
@@ -12,7 +13,7 @@ In "Forums" -> "Manage Forums" -> "Edit Forum"
 - Display active topics above or below the category
 - Number of topics per page
 - Number of active topics pages
-- Display parent forums in the active topics topic row
+- Display Forum or forum with there parent forums in the active topics topic row
 
 ## Screenshots
 - [ACP](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/acp_130.png)
@@ -34,6 +35,13 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 - Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" extension.
 
 ## Changelog
+
+### v1.4.0-b2 (25-10-2026)
+- Fixed: Wrong label id in html template.
+- Fixed: The memory allocated for an SQL query is not released.
+- Fixed: `validate_start()` for pagination has an incorrect parameter.
+- Changed: Build select box with a TWIG macro.
+- Changed: Encoding the key in the query parameters for the pagination URL.
 
 ### v1.4.0-b1 (07-10-2026)
 - Changed: The position and parent forum settings from radio button to select box.
