@@ -8,8 +8,6 @@ The display options for Active Topics in Quick Links saved in a Cookie.
 
 [![Tests](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml)
 
-[![Tests](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml)
-
 #### Settings in Administration Control Panel
 In "Forums" -> "Manage Forums" -> "Edit Forum"
 - Display active topics above or below the category
