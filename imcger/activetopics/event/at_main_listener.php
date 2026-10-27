@@ -89,7 +89,7 @@ class at_main_listener implements EventSubscriberInterface
 
 			$num_pages		 = $event['forum_data']['imcger_at_num_pages'];
 			$topics_per_page = $event['forum_data']['forum_topics_per_page'] ?: $this->config['topics_per_page'];
-			$topics_start	 = $this->request->variable('imc_at_start', 0);
+			$topics_start	 = max(0, $this->request->variable('imc_at_start', 0));
 			$num_disp_topics = min($num_pages * $topics_per_page, $num_topics);
 			$topics_start	 = $this->validate_start($topics_start, $topics_per_page, $num_disp_topics);
 
@@ -112,6 +112,7 @@ class at_main_listener implements EventSubscriberInterface
 			$this->pagination->generate_template_pagination($pagination_url, 'pagination',
 				'imc_at_start', $num_disp_topics, $topics_per_page, $topics_start);
 
+			// Do not display the number of topics if pagination is not available
 			$this->num_disp_topics = $num_disp_topics > $topics_per_page ? $num_disp_topics : 0;
 		}
 	}
@@ -234,8 +235,8 @@ class at_main_listener implements EventSubscriberInterface
 
 		if ($search_id == 'active_topics')
 		{
-			$st			  = $this->request->variable('st', -1);
-			$imcger_at_st = $this->request->variable($this->config['cookie_name'] . '_imcger_at_st', 7, true, \phpbb\request\request_interface::COOKIE);
+			$st			  =  max(-1, min(365, $this->request->variable('st', -1)));
+			$imcger_at_st =  max(0, min(365, $this->request->variable($this->config['cookie_name'] . '_imcger_at_st', 7, true, \phpbb\request\request_interface::COOKIE)));
 
 			if ($st >= 0)
 			{
