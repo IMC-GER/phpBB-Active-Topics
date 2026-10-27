@@ -4,6 +4,9 @@
 If you configure a forum as a category, the active topics of the sub-forums can be displayed there.
 This extension allows you to define the position of the active topics and the number of topics displayed.
 It adds the link to the forum from which the topic originated to the list of active topics.
+The display options for Active Topics in Quick Links saved in a Cookie.
+
+[![Tests](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml)
 
 [![Tests](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml)
 
@@ -12,7 +15,7 @@ In "Forums" -> "Manage Forums" -> "Edit Forum"
 - Display active topics above or below the category
 - Number of topics per page
 - Number of active topics pages
-- Display parent forums in the active topics topic row
+- Display Forum or forum with there parent forums in the active topics topic row
 
 ## Screenshots
 - [ACP](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/acp_130.png)
@@ -32,43 +35,6 @@ Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" e
 - Delete the `activetopics` folder from `phpBB3/ext/imcger/`.
 - Copy the extension to `phpBB3/ext/imcger/activetopics`.
 - Go to "ACP" > "Customise" > "Manage extensions" and enable the "Active Topics" extension.
-
-## Changelog
-
-### v1.3.2 (25-09-2026)
-- Fixed: PHP error `Undefined array key` when moved topic in category.
-- Changed: The trim() function is backward-compatible with PHP 8.6.
-- Changed: Use TWIG to build html code for parent forum links.
-
-### v1.3.1 (15-08-2026)
-- Fixed: The SQL query to check the number of topics does not work with PostgreSQL.
-- Changed: Language variable improved.
-- Changed: The SearchParams variable has been replaced by the event's variable.
-
-### v1.3.0 (20-07-2026)
-- Fixed: In the version-checking class, the logical OR was used instead of the bitwise OR
-- Changed: Use just one SQL query to retrieve the parent forums
-- Changed: Display only parent forums that are subordinate to the current category
-- Changed: jQuery was replaced with vanilla JS, because the page flickered when loading
-- Changed: Update `license.txt`
-- Added: Display active topics in multiple pages (pagination)
-
-### v1.2.0 (01-05-2026)
-- Removed unused language class
-- Improved sql-query for parent forums
-- Renamed `activetopics.js` to `imcger_activetopics.js`
-- Var names changed in acp listener
-- Method name changed in main listener
-- Use acp template event to insert forum settings
-- Use `composer.json` requirements in `ext.php`
-  - Added class `imcger_ext_requirements`
-- Use event to get forum data in main listener
-
-### v1.1.1 (13-10-2024)
-- Minor change
-
-### v1.1.0 (15-12-2023)
-- Published
 
 ## Uninstallation
 - Navigate in the ACP to `Customise -> Manage extensions`.

@@ -14,7 +14,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class at_main_listener implements EventSubscriberInterface
 {
-	private bool  $show_parent;
+	private int   $show_parent;
 	private bool  $display_at;
 	private bool  $display_at_pos;
 	private int   $num_disp_topics;
@@ -33,7 +33,7 @@ class at_main_listener implements EventSubscriberInterface
 		protected string $php_ext,
 	)
 	{
-		$this->show_parent		= false;
+		$this->show_parent		= 0;
 		$this->display_at		= false;
 		$this->display_at_pos	= false;
 		$this->num_disp_topics	= 0;
@@ -47,6 +47,8 @@ class at_main_listener implements EventSubscriberInterface
 			'core.viewforum_get_topic_ids_data'	=> 'viewforum_get_topic_ids_data',
 			'core.viewforum_modify_topics_data'	=> 'viewforum_modify_topics_data',
 			'core.viewforum_modify_topicrow' 	=> 'set_template_vars_topic_row',
+			'core.ucp_delete_cookies'			=> 'ucp_delete_cookies',
+			'core.search_modify_submit_parameters'		=> 'search_modify_submit_parameters',
 		];
 	}
 
@@ -80,27 +82,37 @@ class at_main_listener implements EventSubscriberInterface
 			unset($sql_count_ary['ORDER_BY']);
 
 			$sql = $this->db->sql_build_query('SELECT', $sql_count_ary);
-			$this->db->sql_query($sql);
+			$result = $this->db->sql_query($sql);
 
 			$num_topics		 = (int) $this->db->sql_fetchfield('num_topics');
+			$this->db->sql_freeresult($result);
+
 			$num_pages		 = $event['forum_data']['imcger_at_num_pages'];
 			$topics_per_page = $event['forum_data']['forum_topics_per_page'] ?: $this->config['topics_per_page'];
-			$topics_start	 = $this->request->variable('imc_at_start', 0);
-			$topics_start	 = $this->validate_start($topics_start, $topics_per_page, $num_topics);
+			$topics_start	 = max(0, $this->request->variable('imc_at_start', 0));
 			$num_disp_topics = min($num_pages * $topics_per_page, $num_topics);
+			$topics_start	 = $this->validate_start($topics_start, $topics_per_page, $num_disp_topics);
 
 			// Set a query with a start and limit
 			$event['sql_start'] = $topics_start;
 			$event['sql_limit'] = $topics_per_page;
 
 			// Get URL-parameters for pagination
+			$append_params = $new_params = [];
 			parse_str($this->user->page['query_string'], $append_params);
 			unset($append_params['imc_at_start']);
 
-			$pagination_url = append_sid($this->root_path . $this->user->page['page_name'], $append_params);
+			// Encoding the query parameters of the URL
+			foreach ($append_params as $key => $value)
+			{
+				$new_params[urlencode($key)] = urlencode($this->request->variable($key, '1'));
+			}
+
+			$pagination_url = append_sid($this->root_path . $this->user->page['page_name'], $new_params);
 			$this->pagination->generate_template_pagination($pagination_url, 'pagination',
 				'imc_at_start', $num_disp_topics, $topics_per_page, $topics_start);
 
+			// Do not display the number of topics if pagination is not available
 			$this->num_disp_topics = $num_disp_topics > $topics_per_page ? $num_disp_topics : 0;
 		}
 	}
@@ -125,7 +137,20 @@ class at_main_listener implements EventSubscriberInterface
 			{
 				$current_forum_id = $event['forum_id'];
 
-				$sql_array = [
+				$sql_ary_forums = [
+					'SELECT'    => 't.topic_id, f.forum_name, f.forum_id',
+					'FROM'      => [FORUMS_TABLE => 'f'],
+					'LEFT_JOIN' => [
+						[
+							'FROM' => [TOPICS_TABLE => 't'],
+							'ON'   => $this->db->sql_in_set('t.topic_id', $topic_list) . '
+									AND t.topic_status <> ' . ITEM_MOVED,
+						],
+					],
+					'WHERE'     => 'f.forum_id = t.forum_id',
+				];
+
+				$sql_ary_parent_forums = [
 					'SELECT'    => 't.topic_id, f.forum_name, f.forum_id',
 					'FROM'      => [FORUMS_TABLE => 'f'],
 					'LEFT_JOIN' => [
@@ -150,9 +175,10 @@ class at_main_listener implements EventSubscriberInterface
 					'ORDER_BY'  => 't.topic_id, f.left_id ASC',
 				];
 
-				$sql    = $this->db->sql_build_query('SELECT', $sql_array);
-				$result = $this->db->sql_query($sql);
-				$forums	= $this->db->sql_fetchrowset($result);
+				$sql_array	= $this->show_parent == 1 ? $sql_ary_parent_forums : $sql_ary_forums;
+				$sql		= $this->db->sql_build_query('SELECT', $sql_array);
+				$result		= $this->db->sql_query($sql);
+				$forums		= $this->db->sql_fetchrowset($result);
 				$this->db->sql_freeresult($result);
 
 				foreach ($forums as $forum)
@@ -182,6 +208,44 @@ class at_main_listener implements EventSubscriberInterface
 			$topic_row['imcger_at_forum_parents'] = $this->links_forums[$row['topic_id']];
 
 			$event['topic_row'] = $topic_row;
+		}
+	}
+
+	/**
+	 * Deleted cookie
+	 */
+	public function ucp_delete_cookies(object $event): void
+	{
+		$cookie_name = $event['cookie_name'];
+
+		if ($cookie_name == 'imcger_at_st')
+		{
+			$set_time = time() - 31536000;
+
+			$this->user->set_cookie($cookie_name, '', $set_time);
+		}
+	}
+
+	/**
+	 * Store the sort days in a cookie and load the cookie variable as the default setting.
+	 */
+	public function search_modify_submit_parameters(object $event): void
+	{
+		$search_id = $event['search_id'];
+
+		if ($search_id == 'active_topics')
+		{
+			$st			  =  max(-1, min(365, $this->request->variable('st', -1)));
+			$imcger_at_st =  max(0, min(365, $this->request->variable($this->config['cookie_name'] . '_imcger_at_st', 7, true, \phpbb\request\request_interface::COOKIE)));
+
+			if ($st >= 0)
+			{
+				$this->user->set_cookie('imcger_at_st', $st, time() + 31536000);
+			}
+			else
+			{
+				$this->request->overwrite('st', $imcger_at_st, \phpbb\request\request_interface::REQUEST);
+			}
 		}
 	}
 
