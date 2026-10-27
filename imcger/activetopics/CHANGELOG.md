@@ -2,7 +2,7 @@
 
 ## Changelog
 
-### v1.4.0 (27-10-2026)
+### v1.4.0 (05-11-2026)
 - Fixed: Wrong label id in html template.
 - Fixed: The memory allocated for an SQL query is not released.
 - Fixed: `validate_start()` for pagination has an incorrect parameter.

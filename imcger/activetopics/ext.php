@@ -25,7 +25,7 @@ class ext extends \phpbb\extension\base
 		$language->add_lang('info_acp_activetopics', 'imcger/activetopics');
 
 		// Check php and phpBB extension requirments
-		$ext_requirements = new \imcger\numberofunrdposts\core\imcger_ext_requirements($ext_manager, $language, $this->extension_name);
+		$ext_requirements = new \imcger\activetopics\core\imcger_ext_requirements($ext_manager, $language, $this->extension_name);
 
 		return $ext_requirements->check();
 	}

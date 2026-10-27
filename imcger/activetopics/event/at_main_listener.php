@@ -48,7 +48,7 @@ class at_main_listener implements EventSubscriberInterface
 			'core.viewforum_modify_topics_data'	=> 'viewforum_modify_topics_data',
 			'core.viewforum_modify_topicrow' 	=> 'set_template_vars_topic_row',
 			'core.ucp_delete_cookies'			=> 'ucp_delete_cookies',
-			'core.search_modify_submit_parameters'		=> 'search_modify_submit_parameters',
+			'core.search_modify_submit_parameters' => 'search_modify_submit_parameters',
 		];
 	}
 

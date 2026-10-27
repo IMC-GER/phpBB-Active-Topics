@@ -36,7 +36,7 @@ class at_acp_listener implements EventSubscriberInterface
 	public function acp_manage_forums_request_data(object $event): void
 	{
 		$forum_data = $event['forum_data'];
-		$forum_data['imcger_display_active_position'] = max(0, min(1, $this->request->variable('imcger_display_active_position', 0)));
+		$forum_data['imcger_display_active_position'] = $this->request->variable('imcger_display_active_position', false);
 		$forum_data['imcger_at_num_pages']			  = max(1, min(9999, $this->request->variable('imcger_at_num_pages', 1)));
 		$forum_data['imcger_at_show_forum_parents']	  = max(0, min(2, $this->request->variable('imcger_at_show_forum_parents', 0)));
 		$event['forum_data'] = $forum_data;
