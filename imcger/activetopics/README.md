@@ -8,8 +8,6 @@ The display options for Active Topics in Quick Links saved in a Cookie.
 
 [![Tests](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml)
 
-[![Tests](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/phpBB-Active-Topics/actions/workflows/tests.yml)
-
 #### Settings in Administration Control Panel
 In "Forums" -> "Manage Forums" -> "Edit Forum"
 - Display active topics above or below the category
@@ -18,8 +16,9 @@ In "Forums" -> "Manage Forums" -> "Edit Forum"
 - Display Forum or forum with there parent forums in the active topics topic row
 
 ## Screenshots
-- [ACP](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/acp_130.png)
+- [ACP](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/acp_en.png)
 - [Forum](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/category_130.png)
+- [Active Topics](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/sort_days.jpg)
 
 ## Requirements
 - phpBB >= 3.3.16, < 4.0.0-dev  
