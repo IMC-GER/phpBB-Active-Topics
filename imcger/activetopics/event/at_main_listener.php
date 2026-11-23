@@ -43,11 +43,11 @@ class at_main_listener implements EventSubscriberInterface
 	public static function getSubscribedEvents(): array
 	{
 		return [
-			'core.generate_forum_nav'		 	=> 'get_forum_data',
-			'core.viewforum_get_topic_ids_data'	=> 'viewforum_get_topic_ids_data',
-			'core.viewforum_modify_topics_data'	=> 'viewforum_modify_topics_data',
-			'core.viewforum_modify_topicrow' 	=> 'set_template_vars_topic_row',
-			'core.ucp_delete_cookies'			=> 'ucp_delete_cookies',
+			'core.generate_forum_nav'		 	   => 'get_forum_data',
+			'core.viewforum_get_topic_ids_data'	   => 'viewforum_get_topic_ids_data',
+			'core.viewforum_modify_topics_data'	   => 'viewforum_modify_topics_data',
+			'core.viewforum_modify_topicrow' 	   => 'set_template_vars_topic_row',
+			'core.ucp_delete_cookies'			   => 'ucp_delete_cookies',
 			'core.search_modify_submit_parameters' => 'search_modify_submit_parameters',
 		];
 	}

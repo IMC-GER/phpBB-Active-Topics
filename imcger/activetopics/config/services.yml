@@ -5,7 +5,7 @@ services:
             - '@request'
         tags:
             - { name: event.listener }
-            
+
     imcger.activetopics.main_listener:
         class: imcger\activetopics\event\at_main_listener
         arguments:
