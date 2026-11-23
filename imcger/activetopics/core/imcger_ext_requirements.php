@@ -42,7 +42,7 @@ class imcger_ext_requirements
 
 	public function check_php()
 	{
-		$require_str = preg_replace('#[,\s]+#', ' ', trim($this->metadata['require']['php'] ?? '', ' \f\n\r\t\v'));
+		$require_str = preg_replace('#[,\s]+#', ' ', trim($this->metadata['require']['php'] ?? '', " \f\n\r\t\v"));
 		$require_php = explode(' ', $require_str);
 
 		if (strlen($require_php[0]))
@@ -76,7 +76,7 @@ class imcger_ext_requirements
 
 	public function check_phpbb()
 	{
-		$require_str   = preg_replace('#[,\s]+#', ' ', trim($this->metadata['require']['phpbb/phpbb'] ?? $this->metadata['extra']['soft-require']['phpbb/phpbb'] ?? '', ' \f\n\r\t\v'));
+		$require_str   = preg_replace('#[,\s]+#', ' ', trim($this->metadata['require']['phpbb/phpbb'] ?? $this->metadata['extra']['soft-require']['phpbb/phpbb'] ?? '', " \f\n\r\t\v"));
 		$require_phpbb = explode(' ', $require_str);
 
 		if (strlen($require_phpbb[0]))

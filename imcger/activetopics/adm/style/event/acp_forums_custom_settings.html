@@ -9,19 +9,15 @@
 
 <script>
 	// Toggle the input field topics_per_page
-	document.getElementById('forum_type').addEventListener('change', function() {
-		const forumType = document.getElementById('forum_type');
-		const selectedValue = forumType.options[forumType.selectedIndex].value;
+	const imcgerAtToggle = function() {
+		const isCat = document.getElementById('forum_type').value == '{{ FORUM_CAT }}';
 
-		if (selectedValue == '{{ FORUM_CAT }}') {
-			document.getElementById('imcger_aktive_topics_per_page').disabled = false;
-			document.getElementById('topics_per_page').disabled = true;
-		} else {
-			document.getElementById('imcger_aktive_topics_per_page').disabled = true;
-			document.getElementById('topics_per_page').disabled = false;
-		}
-	});
+		document.getElementById('imcger_aktive_topics_per_page').disabled = !isCat;
+		document.getElementById('topics_per_page').disabled = isCat;
+	};
 
-	// Trigger change event on page load
-	document.getElementById('forum_type').dispatchEvent(new Event('change'));
+	document.getElementById('forum_type').addEventListener('change', imcgerAtToggle);
+
+	// Set the state on page load
+	imcgerAtToggle();
 </script>

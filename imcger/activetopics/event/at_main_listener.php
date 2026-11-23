@@ -105,7 +105,7 @@ class at_main_listener implements EventSubscriberInterface
 			// Encoding the query parameters of the URL
 			foreach ($append_params as $key => $value)
 			{
-				$new_params[urlencode($key)] = urlencode($this->request->variable($key, '1'));
+				$new_params[urlencode($key)] = urlencode(htmlspecialchars_decode($this->request->variable($key, '1', true), ENT_COMPAT));
 			}
 
 			$pagination_url = append_sid($this->root_path . $this->user->page['page_name'], $new_params);

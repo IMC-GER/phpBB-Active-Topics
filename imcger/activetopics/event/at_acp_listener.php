@@ -47,7 +47,7 @@ class at_acp_listener implements EventSubscriberInterface
 	 */
 	public function acp_manage_forums_initialise_data(object $event): void
 	{
-		if ($event['action'] == 'add')
+		if ($event['action'] == 'add' && !$event['update'])
 		{
 			$forum_data = $event['forum_data'];
 			$forum_data['imcger_display_active_position'] = '0';

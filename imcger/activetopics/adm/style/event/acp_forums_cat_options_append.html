@@ -28,7 +28,7 @@
 		</dl>
 
 {% macro select(name, options, multiple = null, size = null) -%}
-	<select name="{{ name }}{{ multiple ? '[]' }}"{{
+	<select id="{{ name }}" name="{{ name }}{{ multiple ? '[]' }}"{{
 		(size !== null ? ' size="' ~ size ~ '"') ~
 		(multiple ? ' multiple')
 	}}>

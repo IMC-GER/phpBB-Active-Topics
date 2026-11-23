@@ -2,6 +2,13 @@
 
 ## Changelog
 
+### v1.4.1-pl1 (23-11-2026)
+- Changed: Improve JS in `acp_forums_custom_settings.html`.
+- Changed: Added id to select macro.
+- Changed: Tidy up url search parameter.
+- Changed: The settings must not be overwritten when the form is reloaded for a new forum.
+- Fixed: `trim()` Incorrect quotation marks corrected.
+
 ### v1.4.0 (05-11-2026)
 - Fixed: Wrong label id in html template.
 - Fixed: The memory allocated for an SQL query is not released.
