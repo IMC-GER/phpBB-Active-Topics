@@ -16,9 +16,9 @@ In "Forums" -> "Manage Forums" -> "Edit Forum"
 - Display Forum or forum with there parent forums in the active topics topic row
 
 ## Screenshots
-- [ACP](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/acp_en.png)
-- [Forum](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/category_130.png)
-- [Active Topics](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/sort_days.jpg)
+- [ACP](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/acp_en.jpg)
+- [Forum](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/forum.jpg)
+- [Sort days](https://raw.githubusercontent.com/IMC-GER/images/main/screenshots/activetopics/sort_days.jpg)
 
 ## Requirements
 - phpBB >= 3.3.16, < 4.0.0-dev  
